@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="
+    https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        .header{
+            background-color: rgb(70, 81, 70);
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px;
+            flex-wrap: wrap;
+            
+        }
+        #mainProf{
+            color: white;
+        }
+        #mainProf:hover{
+            color: white;
+           
+        }
+        /*  */
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        } 
+        #usernameProfile{
+            position: relative;
+            left: 10px;
+        }
+        #usernameProfile:hover{
+            font-weight: bold;
+            
+        }
+        .profile{
+            height: 20px;
+            width: 20px;
+            border: 2px solid black;
+            border-radius: 50%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile:hover{
+            cursor: pointer;
+            /* border-color: white; */
+            /* color:white; */
+        }
+        #usname{
+            background-color: green;
+        }
+        .csbtn{
+            font-family: emoji;
+            font-weight: bold;
+            height: 33px;
+            width: 96px;
+            border-radius: 5px;
+            background-color: #bdbdb2;
+        }
+        .csbtn:hover{
+            cursor: pointer;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .spc{
+            height: 10px;
+        }
+        .root{
+            /* background-color: blue; */
+            width: 50%;
+            
+            
+            /* overflow-y: scroll; */
+            
+        }
+        
+        
+        
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+        /* ::-webkit-scrollbar{
+            width: 5px;
+            background-color: pink;
+        }
+        ::-webkit-scrollbar-track{
+            background-color: rgb(189, 183, 183);
+            
+        } */
+        .root2{
+            /* background-color: pink; */
+            width: 400px;
+           
+        }
+        .root{
+            width: 400px;
+        }
+        .searchText{
+            height: 100%;
+            /* width: 400px; */
+            width: 360px;
+            border: none;
+            padding: 4px;
+        }
+        .searchText:focus{
+            outline: none;
+        }
+        .main{
+            font-family: math;
+            background-color: rgb(148, 170, 161);
+            padding: 4px;
+            width: 400px;
+            border-radius: 2px;
+        }
+        .srchIcon{
+            display: inline;
+            /* background-color: green; */
+        }
+        .srchIcon:hover{
+            cursor: pointer;
+        }
+        .getAllBlogs{
+            /* background-color: green; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px;
+        }
+        #getblog{
+            font-family: cursive;
+            background-color: #cbcbcb;
+            border-color: gainsboro;
+            border-radius: 10px;
+            font-weight: bold;
+            height: 40px;
+            width: 106px;
+            cursor: pointer;
+        }
+        
+        .searchBar{
+            border: 2px solid rgba(199, 194, 194, 0.501);
+            border-radius: 10px;
+            background-color: gainsboro;
+            /* background-color: green; */
+            width: 400px;
+            height: 40px;
+            margin-bottom: 10px;
+        }
+        .space2{
+            display: none;
+        }
+        @media screen and (max-width: 680px) {
+  /* body {
+    background-color: lightgreen;
+    
+  } */
+  .searchBar{
+    width: 300px;
+  }
+  .searchText{
+    width: 250px;
+  }
+  .main{
+    width: 300px;
+  }
+  .root2{
+            /* background-color: pink; */
+            width: 300px;
+           
+        }
+        .root{
+            width: 300px;
+        }
+        .space2{
+            display: block;
+        }
+}
+.cmntDesc{
+    margin-top: 4px;
+    margin-bottom: 4px;
+    width: 98%;
+    height: 40px;
+    background-color: gray;
+    padding: 2px;
+    border-radius: 5px;
+}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="space">
+
+        </div>
+        <div class="photo">
+            <a href="profile.html" style="text-decoration: none;" id="mainProf">
+                <div class="profile">
+                    <i class="fa-solid fa-user fa-xl"></i>
+                </div>
+                <span id="usernameProfile">username</span>
+            </a>
+        </div>
+        <div class="space2">
+
+        </div>
+        
+        
+    </div>
+    <div>
+    <!-- <h1>Home here</h1> -->
+    <div class="getAllBlogs">
+        <button id="getblog" onclick="getData()">Get All Blogs</button>
+    </div>
+    
+    <div class="searchBar">
+        <input type="text" name="" id="search" placeholder="search" class="searchText">
+    <div class="srchIcon">
+        <i class="fa-solid fa-magnifying-glass fa-lg" onclick="search()" class="searchIcon" id="searchbtn" style=" margin-left: 4px;"></i>
+    </div>
+    
+    </div>
+    
+</div>
+<script>
+    var val=localStorage.getItem("inputValue");
+    document.getElementById('usernameProfile').innerText=val;
+
+    // getData();
+    const main=document.createElement('div');
+    const root=document.createElement('div');
+    const root2=document.createElement('div');
+    main.className='main';
+    getData();  
+    async function getData(){
+  
+       root.innerText="";
+       root2.innerText="";  
+       main.innerText="";
+       console.log("hey i am in");
+        const response=await fetch('/api2');
+        const data=await response.json();
+        console.log(data);
+        document.getElementById('search').value="";
+        for(item of data){
+            const hr=document.createElement('hr');
+            
+            const bh1=document.createElement('div');
+            const bh=document.createElement('div');
+            bh.className="spc";
+            bh1.className="spc";
+
+            const postID=document.createElement('div');
+            postID.textContent=`POST-ID: ${item._id}`
+
+            const username=document.createElement('div');
+            username.textContent=`USERNAME: ${item.username}`;
+
+            const blogTopic=document.createElement('div');
+            blogTopic.textContent=`BLOG-TOPIC: ${item.blogTopic}`;
+            
+            const blogDesc=document.createElement('div');
+            blogDesc.textContent=`BLOG: ${item.blogDesc}`;
+
+
+            const comment=document.createElement('div');
+            comment.textContent=`COMMENT: ${item.comment}`;
+           
+        
+            const commentSection=document.createElement('button');
+            commentSection.innerHTML="Add Coment";
+            commentSection.className="csbtn";
+            comment.className='cmntDesc';
+            root.append(postID,username,blogTopic,blogDesc,comment,commentSection,bh1,hr,bh);
+            main.append(root);
+            commentSection.addEventListener('click', function handleClick(event) {
+                console.log('element clicked 🎉🎉🎉', event);
+                commentPage();
+                
+            });
+            document.body.append(main); 
+            root.className="root";
+        }
+        
+    }
+    function commentPage(){
+           window.location.href="commentPage.html"; 
+    }
+    
+    
+    async function search(){
+        root.innerText="";
+        root2.innerText="";
+        main.innerText="";
+        var srch=document.getElementById('search').value;
+        if(srch==""){
+            alert('enter something in search');
+            return;
+        }
+        const response=await fetch('/api2');
+        const data=await response.json();
+        // console.log(data);
+        var flag=0;
+        for(item of data){
+            const br=document.createElement('hr');
+            // console.log(srch);
+            // console.log(item.blogTopic);
+            if(item.blogTopic==srch){
+                flag=1;
+                console.log(item.blogTopic);
+                
+                const username=document.createElement('div');
+                username.textContent=`USERNMAE: ${item.username}`;
+
+                const blogTopic=document.createElement('div');
+                blogTopic.textContent=`BLOG-TOPIC: ${item.blogTopic}`;
+
+                const blogDesc=document.createElement('div');
+                blogDesc.textContent=`BLOG: ${item.blogDesc}`;
+
+                
+                const comment=document.createElement('div');
+                comment.textContent=`COMMENT: ${item.comment}`;
+                comment.className='cmntDesc'
+
+                const commentSection=document.createElement('button');
+                commentSection.innerHTML="Add Coment";
+                commentSection.className="csbtn";
+
+                root2.append(username,blogTopic,blogDesc,comment,commentSection,br);
+                main.append(root2);
+                document.body.append(main); 
+                root2.className="root2";
+            }
+
+        }
+        if(flag==0){
+            alert('No Such Blogs Available');
+        }
+        
+    }
+    
+   
+
+</script>
+    
+</body>
+</html>

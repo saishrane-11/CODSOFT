@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-image {
+  /* The image used */
+  background-image: url("./bgImg.jpg");
+  
+  /* Add the blur effect */
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+  
+  /* Full height */
+  height: 100%; 
+  
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Position text in the middle of the page/image */
+.bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 60%;
+  padding: 20px;
+  text-align: center;
+}
+.inputField{
+    width: 250px;
+    /* border: none; */
+    padding: 4px;
+    border: 1px solid rgb(50 50 50);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background: #6464648c;
+}
+.inputField:hover{
+    outline: none;
+}
+</style>
+</head>
+<body>
+
+<div class="bg-image"></div>
+
+<div class="bg-text">
+    <div class="id">
+        <p>Enter POST ID: </p>
+        <input type="text" name="" id="userID" class="inputField" placeholder="Enter POST ID">
+    </div>
+    <div class="comment">
+        <p>Enter Comment: </p>
+        <input type="text" name="" id="comment" class="inputField" placeholder="Comment here">
+        <br>
+        <button id="btnComment" onclick="getData()" style="cursor: pointer;">
+            Post Comment
+        </button>
+    </div>
+</div>
+<script>
+    
+    function goBack(){
+        window.location.href="home.html";
+        
+    }
+    async function getData(){
+        var id=document.getElementById('userID').value;
+    var comment=document.getElementById('comment').value;
+        const response=await fetch('/api2');
+        const data=await response.json();
+        console.log(data);
+        flag=1;
+        for(item of data){
+            // console.log(item._id+":"+id)
+            console.log("for loop");
+            if(id == item._id){
+            flag=0;
+            console.log("commedf: "+item.comment);
+            c1=item.comment;
+            console.log("if");
+            console.log(id);
+            demo=c1+" ["+comment+"]";
+            console.log("demo:"+demo);
+            
+           
+            // item.comment.push(demo);
+            const data={uid:id,comment:demo,c2:1};
+
+            const options={
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data)
+            }
+            const response= await fetch("/api2",options);
+            }
+            // console.log(response);
+
+            
+        }
+        if(flag==1){
+            alert("No such post ID available");
+            goBack();
+            return;
+        }
+        alert('Comment Posted');
+        goBack();
+                
+    }
+</script>
+</body>
+</html>

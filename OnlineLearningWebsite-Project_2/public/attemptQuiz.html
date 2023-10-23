@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .ans{
+            height: 20px;
+            width: 100px;
+            border: 2px solid black;
+        }
+        body{
+            background-color: gainsboro;
+        }
+        .root{
+            /* height: 100vh;
+            background-color: green; */
+            background-color: #808080ad;
+            border-radius: 10px;
+            border: 2px solid black;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        #submit{
+            background-color: pink;
+        }
+        .quizes{
+            border: 2px solid rgb(220, 220, 220);
+            border-radius: 10px;
+            background-color: white;
+        }
+        #attemptQuizButton{
+            border: none;height:100%;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            width: 60px;
+        }
+        #attemptQuizButton:hover{
+            cursor: pointer;
+        }
+        .attemptQuizWrapper{
+            /* background-color: green; */
+            height: 40vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* justify-content: center; */
+        }
+        .atqText{
+            font-size: 20px;
+        }
+        .inputField{
+            width: 250px;
+            border: none;
+            padding: 4px;
+             
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+        .inputField:focus{
+            outline: none;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .root{
+            padding: 16px;
+            width: 380px;
+        }
+        .ans{
+            width: 250px;
+            border: none;
+            padding: 4px;
+            border-radius: 8px;
+            border: 2px solid rgb(220, 220, 220);
+        }
+        .ans:focus{
+            outline: none;
+        }
+        #submit{
+            background: #13c5ff;
+            border-radius: 10px;
+            width: 150px;
+            height: 30px;
+        }
+        #submit:hover{
+            color: white;
+            cursor: pointer;
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="attemptQuizWrapper">
+        <br><br>
+        <h1>ATTEMPT QUIZ</h1> <br>
+        <span class="atqText">Enter Course ID</span> <br>
+<div class="quizes">
+    <input type="text" name="" id="courseID" placeholder="couseId" class="inputField"> 
+        <button id="attemptQuizButton" onclick="getData()">Attempt</button>
+</div>
+        
+        <br>
+        <button id="submit" onclick="postData()">submit quiz</button>
+    </div>
+   
+
+
+
+
+
+
+
+    <script>
+    var courseIDV;
+    var usernameV=localStorage.getItem("inputValue");
+    
+
+    
+    async function postData(){
+        const data= {username:usernameV,courseID:courseIDV};
+
+        const options={
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        }
+        const response= await fetch("/api4",options);
+        const json= await response.json();
+        console.log(json);
+        alert("Quiz Submmited");
+        profile();
+    }
+
+   
+    function profile(){
+        window.location.href="profile.html";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    async function getData(){
+     courseIDV=document.getElementById('courseID').value;
+   const response=await fetch('/api3');
+   const data=await response.json();
+   console.log(data);
+    console.log("cid "+courseIDV); 
+    const root=document.createElement('div');
+   for(item of data){
+    console.log("1");
+    console.log(item.cid);
+    if(item.cid== courseIDV){
+        console.log("in");
+        const ans1=document.createElement('input');
+    const ans2=document.createElement('input');
+    const ans3=document.createElement('input');
+    const ans4=document.createElement('input');
+    const ans5=document.createElement('input');
+    
+    // const couseId=document.createElement('div');
+    //     couseId.textContent=`couse id: ${item._id}`;
+       const q1=document.createElement('div');
+       q1.textContent=`Question1: ${item.q1}`;
+       const q2=document.createElement('div');
+       q2.textContent=`Question2:${item.q2}`;
+       const q3=document.createElement('div');
+       q3.textContent=`Question3:${item.q3}`;
+       const q4=document.createElement('div');
+       q4.textContent=`Question4:${item.q4}`;
+       const q5=document.createElement('div');
+       q5.textContent=`Question5:${item.q5}`;
+        
+       root.append(q1,ans1,q2,ans2,q3,ans3,q4,ans4,q5,ans5);
+       document.body.append(root); 
+        root.className="root";
+       ans1.className='ans';
+       ans2.className='ans';
+       ans3.className='ans';
+       ans4.className='ans';
+       ans5.className='ans';
+       
+    }}
+    
+    }
+    
+    </script>
+
+</body>
+</html> 

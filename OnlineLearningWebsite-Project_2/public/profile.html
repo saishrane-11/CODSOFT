@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="
+    https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+         *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        } 
+        .header{
+            background-color: rgb(70, 81, 70);
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px;
+            flex-wrap: wrap;
+        }
+        #mainProf{
+            color: white;
+        }
+        #mainProf:hover{
+            color: white;
+        }
+        #usernameProfile{
+            position: relative;
+            right: 8px;
+        }
+        #usernameProfile:hover{
+            font-weight: bold;
+            
+        }
+        .profile{
+            height: 20px;
+            width: 20px;
+            border: 2px solid black;
+            border-radius: 50%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile:hover{
+            cursor: pointer;
+            /* border-color: white; */
+            /* color:white; */
+        }
+        .wrapperProfile{
+            min-height: calc(100vh - 80px);
+            background-color: whitesmoke;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: scroll;
+        }
+        .createCourse{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            background-color: rgb(105, 105, 105);
+            width: 400px;
+            padding: 8px;
+            margin:10px;
+            border-radius: 10px;
+            -webkit-box-shadow: 0px 0px 28px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 28px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 28px 0px rgba(0,0,0,0.75);
+        }
+        #courseTopic{
+            width: 100%;
+            border: none;
+            padding: 4px;
+            border-radius: 8px;
+            border: 2px solid rgba(220, 220, 220, 0.68);
+        }
+        #courseTopic:focus{
+            outline: none;
+        }
+        #video{
+            width: 100%;
+            border: none;
+            padding: 4px;
+            border-radius: 8px;
+            border: 2px solid rgba(220, 220, 220, 0.68);
+        }
+        #quizLink{
+            width: 100%;
+            border: none;
+            padding: 4px;
+            border-radius: 8px;
+            border: 2px solid rgba(220, 220, 220, 0.68);
+        }
+        #quizLink{
+            outline: none;
+        }
+        #createPost{
+            left: 100px;
+            position: relative;
+            border: 2px solid gainsboro;
+            border-radius: 10px;
+            background-color: rgb(255, 25, 25);
+            width: 158px;
+            height: 34px;
+        }
+        #createPost:hover{
+            background-color: red;
+            cursor: pointer;
+        }
+
+        .quizForCourse{
+            width: 400px;
+            background-color: green;
+            height: 40px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        #quiz{
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            
+        }
+        #quiz:hover{
+            cursor: pointer;
+            background-color: gray;
+        }
+        .attemption{
+            display: flex;
+            flex-direction: column;
+        }
+        .getCertificate{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px;
+        }
+        #certificate:hover{
+            cursor: pointer;
+        }
+        #logOut{
+            border: 1px solid gainsboro;
+            padding: 4px;
+            border-radius: 5px;
+            background-color: #e7e7e7;
+            display: none;
+            color: black;
+        }
+       
+/*         
+        #usernameProfile:hover .logOut{
+            cursor: pointer;
+            background-color: gray;
+            display: block;
+        } */
+
+</style>
+
+</head>
+<body>
+    <div class="header">
+        <div class="space">
+
+        </div>
+        <a href="profile.html" style="text-decoration: none;" id="mainProf">
+            <div class="profile">
+                <i class="fa-solid fa-user fa-xl"></i>
+            </div>
+            <span id="usernameProfile" onmouseover="show()">username</span>
+            <span id="logOut">
+                <br>
+                <hr>
+                
+                <span class="lo" id="log"  onmouseover="gotoIndex()">
+                    Log Out</span>
+            </span>
+        </a>
+        
+    </div>
+ 
+ 
+    <div class="wrapperProfile">
+        
+        <div class="createCourse" >
+           <span style="position: relative;left: 100px; color: gainsboro;"> <b>CREATE YOUR COURSE</b></span> <br> <br><hr style="border: 1px solid white;"> <br>
+            <div class="createCourseTopic">
+                <span style="width: 50%;">COURSE TOPIC</span>   <br>
+                <input type="text" name="" placeholder="courseTopic" id="courseTopic">
+            </div>
+            <br>
+            <div class="createCourseFile">
+                <span>File</span><br>
+                <input type="file" name="" id="video">
+            
+            </div>
+            <br>
+            <div class="createCourseDemo">
+                <span>Description</span> <br>
+                <input type="text" name="" id="quizLink" placeholder="Description">
+            </div>
+            <br>
+            <div class="createCourseBtn">
+                <button id="createPost" onclick="postData()">create course</button>
+            </div>
+            <br>
+            
+        </div>
+        
+        <div class="quizForCourse">
+            <button id="quiz" onclick="quiz()">create  quiz for your course</button>
+        </div>
+        <div class="attemption">
+            <button id="attemptQuiz" onclick="attemptQuiz()">Attempt Quiz</button>
+        <button id="getYourData" onclick="getData()">Getyour course data</button>
+        <textarea name="" id="courseComp" cols="30" rows="10" readonly></textarea>
+        <textarea name="" id="courseEnroll" cols="30" rows="10" readonly></textarea>
+    </div>
+
+
+   
+        </div>
+        <div class="getCertificate">
+            <button id="certificate" onclick="goToCertficatePage()">
+                GET CERTIFICATE
+            </button>
+        </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase.js"></script>
+    <script src="config.js"></script>
+
+<!-- ///////////////////////////////////////////////////////////////// -->
+<script>
+    function gotoIndex(){
+        document.getElementById('log').color='green';
+        window.location.href="index.html";
+    }
+    function show(){
+        document.getElementById('logOut').style.display='block';
+    }
+    </script>
+  <script>
+    function goToCertficatePage(){
+        window.location.href="certificate.html";
+    }
+  </script>
+   <script>
+    async function getData(){
+
+
+        var usernameV=localStorage.getItem("inputValue");
+        console.log("username: "+usernameV);
+
+        const response5=await fetch('/api5');
+        const data5=await response5.json();
+        console.log(data5);
+        demo2=[];
+        xyz=[];
+        for(item of data5){
+            console.log(item);
+            if(item.username==usernameV){
+                demo2.push(item.courseEnrollID);
+            }
+        }
+        // console.log("course enroll: "+demo2);
+        xyz.push(demo2);
+    
+
+        const response=await fetch('/api4');
+        const data=await response.json();
+        console.log(data);
+        const demo=[];
+        console.log("demo before: "+demo);
+        for(item of data){
+            // console.log(item);
+            if(item.username==usernameV){
+                console.log("item.username"+item.username);
+                console.log("this      "+demo);
+                if(demo.includes(item.courseID)){
+                    console.log('Includes');
+                    continue;
+                };
+                demo.push(item.courseID);
+
+            }
+        }
+        console.log("demo after "+demo);
+        
+
+        document.getElementById('courseComp').value="course completed(ID): "+demo+ " progress(100%)";
+        
+        function arrayRemove(arr,value){
+            return arr.filter(function(geeks){
+                return geeks !=value;
+            }
+            )
+        }
+    
+        demo.forEach((value)=>{
+            demo2.forEach((value2=>{
+                if(value==value2){
+                    demo2=arrayRemove(demo2,value);
+                }
+            }))
+        });
+
+        console.log("final demo1: "+demo);
+        console.log("final demo2: "+demo2);
+        document.getElementById('courseEnroll').value="course enrolled(ID): "+demo2+" progress(0%)";
+}
+
+   </script>
+   <script>
+        function quiz(){
+            window.location.href="quiz.html";
+        }
+        function attemptQuiz(){
+            window.location.href="attemptQuiz.html";
+        }
+    </script>
+    
+    <script>
+        var val=localStorage.getItem("inputValue");
+        console.log("value: "+val);
+        // document.getElementById('usname').innerText=val;
+        var courseLinkV;
+
+        async function postData(){
+            console.log("post data");
+            console.log("value in: ",val);
+            var courseTopicV=document.getElementById('courseTopic').value;
+            var quizLinkV=document.getElementById('quizLink').value;
+            console.log("in postdata "+courseTopicV,quizLinkV);
+            console.log("1");
+            const data= {cid:val,courseTopic:courseTopicV,quizLink:quizLinkV,courseLink:courseLinkV};
+            console.log(data);
+            const options={
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data)
+            }
+            
+            const response= await fetch("/api2",options);
+            alert("Course Created Successfully");
+            const json= await response.json();
+            console.log(json);
+            console.log(courseLinkV);
+        }
+        
+
+        //////////////////////////////////////////////////
+        function abcd(videoFile){
+    console.log("I am in abcd()");
+    let storageRef= firebase.storage().ref("videos/"+videoName+".jpg");
+    console.log("your image name is: "+videoName);
+    console.log("your image file is: "+videoFile);
+    let task = storageRef.put(videoFile);
+    console.log("readform()");
+    // readForm();
+    videoName= val;
+    task.on('state_changed',function(snapshot){
+        console.log("task on");
+        task.snapshot.ref.getDownloadURL().then(function(url){
+            videoUrl=url;
+            courseLinkV=url;
+            firebase.database().ref('videos/'+videoName).set({
+                Name: videoName,
+                Link: videoUrl
+            });
+            alert("video added successfully");
+        });
+      
+    });  
+   
+}
+video.addEventListener('change',function(e){  
+    console.log("hey event");
+        videoName=val;
+        console.log("hey"+videoName);
+        let videoFile=e.target.files[0];
+       
+    
+       
+        abcd(videoFile);
+      
+       
+        alert("file uploaded");
+        console.log("uploaded");
+
+})
+
+
+        /////////////////////////////////////////////////
+    </script>
+  
+  <script>
+    var usernameV=localStorage.getItem("inputValue");
+    // console.log('usname: '+usernameV);
+    // let us=document.getElementById('username');us.textContent=usernameV;
+   </script>
+</body>
+</html>

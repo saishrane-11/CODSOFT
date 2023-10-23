@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="
+    https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .root{
+            /* background-color: white; */
+            background-color: pink;
+        }
+        #usernameProfile{
+            position: relative;
+            right: 8px;
+        }
+        #usernameProfile:hover{
+            font-weight: bold;
+            
+        }
+        .main{
+            width: 400px;
+            border-radius: 10px;
+            margin-top: 10px;
+            background-color:rgb(129, 134, 121);
+            padding: 10px;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-y: scroll;
+        }
+        /* width */
+        ::-webkit-scrollbar {
+        width: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+        }
+        
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+        background: #888; 
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+        }
+
+        .horLine{
+            color: black;
+            background-color: green;
+        }
+        .header{
+            background-color: rgb(70, 81, 70);
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px;
+            flex-wrap: wrap;
+        }
+        body{
+            background-color: whitesmoke;
+        }
+        .profile{
+            height: 20px;
+            width: 20px;
+            border: 2px solid black;
+            border-radius: 50%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            right: 11px;
+        }
+        #mainProf{
+            color: white;
+        }
+        #mainProf:hover{
+            color: white;
+        }
+        .profile:hover{
+            cursor: pointer;
+            border-color: black;
+            color:white;
+        }
+        .wrapper{
+            /* background-color: yellow; */
+            min-height: calc(100vh - 80px);
+            width: 100%;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .getcourseBtn:hover{
+            cursor: pointer;
+            color: white;
+        }
+        .getcourseBtn{
+            /* margin: 10px; */
+            font-family: 'Courier New', Courier, monospace;
+            /* align-self: center; */
+            font-weight: bold;
+            background-color: rgb(0, 85, 255);
+            border: none;
+            height: 40px;
+            width: 100px;
+            border-radius: 10px;   
+            -webkit-box-shadow: 0px 0px 28px 0px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 28px 0px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 28px 0px rgba(0,0,0,0.75);
+        }
+        
+        .searchText{
+            /* height: 40px; */
+            height: 100%;
+            /* width: 400px; */
+            width: 360px;
+            border: none;
+            padding: 4px;
+            
+        }
+        .searchText:focus{
+            outline:none; 
+            /* background-color: gainsboro; */
+        }
+      
+        #searchbtn{
+            
+            cursor: pointer;
+            color: rgba(0, 0, 0, 0.806);
+            margin-left: 4px;
+        }
+        
+        .searchBar{
+            border: 2px solid rgba(199, 194, 194, 0.501);
+            border-radius: 10px;
+            background-color: gainsboro;
+            /* background-color: green; */
+            width: 400px;
+            height: 40px;
+            margin-bottom: 10px;
+        
+        }
+        #cei:hover{
+            cursor: pointer;
+            background-color: green;
+        }
+        #cei{
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            font-weight: bold;
+            color: white;
+            /* width: calc(100%-300px); */
+            width: 90px;
+            height: 100%;
+            border: none;
+            background-color: rgb(24, 186, 24);
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            
+        }
+        #enroll:focus{
+            outline:none;   
+        }
+        #enroll{
+             /* height: 40px; */
+             height: 100%;
+            /* width: 400px; */
+            width: 300px;
+            border: none;
+            padding: 4px;
+        }
+        .enrollBar{
+            border: 2px solid rgba(199, 194, 194, 0.501);
+            border-radius: 10px;
+            background-color: gainsboro;
+            /* background-color: green; */
+            width: 400px;
+            height: 40px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    
+    <script>
+        var srch;
+        function refresh(){
+            srch=document.getElementById('search').value;
+            root.textContent="";
+            main.textContent="";
+
+        }
+        ////////////////////////search/////////////
+    async function search(){
+        refresh();
+     
+        if(srch==""){
+            alert('enter something in search');
+        }
+        const response=await fetch('/api2');
+        const data=await response.json();
+        // console.log(data);
+        var flag=0;
+        for(item of data){
+            console.log("inside");
+        
+            // console.log(srch);
+            // console.log(item.blogTopic);
+            if(item.courseTopic==srch){
+                flag=1;
+                console.log(item.courseTopic);
+                const hr=document.createElement('hr');
+        const couseId=document.createElement('div');
+        couseId.textContent=`couseID: ${item._id}`;
+
+        const courseTopic=document.createElement('div');
+        courseTopic.textContent=`Course Topic: ${item.courseTopic}`;
+        
+        const quizLink=document.createElement('div');
+        quizLink.textContent=`Course Description: ${item.quizLink}`;
+
+
+        const courseLink=document.createElement('a');
+        courseLink.href=`${item.courseLink}`;
+        courseLink.textContent=`course Link: Click to view course`;
+        
+        
+
+        root.append(couseId,courseTopic,quizLink,courseLink,hr);
+       
+        main.appendChild(root);
+        document.body.append(main); 
+        root.className="rootsearch";
+            }
+
+        }
+        console.log("for over");
+        if(flag==  0){
+            console.log("in if");
+            alert("NO Such course available right now");
+        }
+        console.log("if over");
+    }
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var usernameV=localStorage.getItem("inputValue");
+async function postDataEnroll(){
+            console.log("post data");
+        
+            var courseEnrollIDV=document.getElementById('enroll').value;
+
+            console.log("1");
+            const data= {username:usernameV,courseEnrollID:courseEnrollIDV};
+            console.log(data);
+            const options={
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data)
+            }
+            
+            const response= await fetch("/api5",options);
+            alert("post created");
+            const json= await response.json();
+            console.log(json);
+            // console.log(courseLinkV);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        const root=document.createElement('div');
+        const main=document.createElement('div');
+
+async function getData(){
+    refresh();
+    document.getElementById('search').value="";
+    const response=await fetch('/api2');
+    const data=await response.json();
+    console.log(data);
+    
+    main.appendChild(root);
+    document.body.append(main);
+    main.className='main';
+    for(item of data){
+        const space=document.createElement('hr');
+
+        const hr=document.createElement('hr');
+        const couseId=document.createElement('div');
+        couseId.textContent=`couseID: ${item._id}`;
+        
+        const courseTopic=document.createElement('div');
+        courseTopic.textContent=`Course Topic: ${item.courseTopic}`;
+        
+        const quizLink=document.createElement('div');
+        quizLink.textContent=`Course Description: ${item.quizLink}`;
+
+
+        const courseLink=document.createElement('a');
+        courseLink.href=`${item.courseLink}`;
+        courseLink.textContent=`course Link: Click to view course`;
+        
+        
+
+        root.append(couseId,courseTopic,quizLink,courseLink,hr,space);
+        hr.className='horLine';
+        // document.body.append(root); 
+        
+        // root.className="root";
+    }
+    
+}
+
+    </script>
+    <div class="header">
+        <div class="space">
+
+        </div>
+        <a href="profile.html" style="text-decoration: none;" id="mainProf">
+            <div class="profile">
+                <i class="fa-solid fa-user fa-xl"></i>
+            </div>
+            <span id="usernameProfile">username</span>
+        </a>
+    </div>
+    
+    
+        
+    
+    <div class="enrollBar">
+        <input type="text" name="" placeholder="course ID" id="enroll">
+    <button id="cei" onclick="postDataEnroll()">ENROLL</button>
+    </div>  
+
+        <div class="searchBar">
+            <input type="text" name="" class="searchText" id="search" placeholder="search">
+        <!-- <button id="searchbtn" onclick="search()">Search</button> -->
+       
+        <i class="fa-solid fa-magnifying-glass fa-lg" onclick="search()" class="searchIcon" id="searchbtn" ></i>
+
+        </div>
+       
+        <button id="getcourse" class="getcourseBtn" onclick="getData()">get course</button>
+
+
+<script>
+     var usernameV=localStorage.getItem("inputValue");
+        console.log("username: "+usernameV);
+    document.getElementById('usernameProfile').innerText=usernameV;
+    
+</script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase.js"></script>
+    <script src="config.js"></script>
+</body>
+</html>

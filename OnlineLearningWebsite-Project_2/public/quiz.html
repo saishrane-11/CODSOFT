@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Quiz</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .createYourQuiz{
+            width: 100%;
+            height: 100vh;
+            background-color:gainsboro;
+            flex-direction: column;
+            display: flex;
+            align-items:center;
+            /* justify-content: center; */
+        }
+        .inputField{
+            /* background-color: green; */
+            width: 250px;
+            border: none;
+            padding: 4px;
+            border-radius: 8px;
+            border: 2px solid rgb(220, 220, 220);
+        }
+        .inputField:focus{
+            outline: none;
+        }
+        .quizinsert{
+            background: #8ee3ff;
+            border-radius: 10px;
+            width: 150px;
+            height: 30px;
+        }
+        .quizinsert:hover{
+            color: white;
+            cursor: pointer;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function clear(){
+            document.getElementById('cid').value="";
+            document.getElementById('q1').value="";
+            document.getElementById('q2').value="";
+            document.getElementById('q3').value="";
+            document.getElementById('q4').value="";
+            document.getElementById('q5').value="";
+            window.location.href="profile.html";
+        }
+
+        var cidV,q1V,q2V,q3V,q4V,q5V;
+        function readForm(){
+            cidV=document.getElementById('cid').value;
+            q1V=document.getElementById('q1').value;
+            q2V=document.getElementById('q2').value;
+            q3V=document.getElementById('q3').value;
+            q4V=document.getElementById('q4').value;
+            q5V=document.getElementById('q5').value;
+        }
+         async function postData(){
+    
+            // console.log("post data");
+            // console.log("value in: ",val);
+            readForm();
+            clear();
+            //if quiz already e
+
+
+           console.log('readform');
+            const data= {cid:cidV,q1:q1V,q2:q2V,q3:q3V,q4:q4V,q5:q5V};
+            
+            console.log(data);
+            const options={
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data)
+            }
+            
+            const response= await fetch("/api3",options);
+            alert("Quiz Created");
+            const json= await response.json();
+            console.log(json);
+            
+        }
+    </script>
+    <div class="createYourQuiz">
+        <br><br>
+        <h1>CREATE YOUR QUIZ</h1>
+    Enter Course ID <br>
+    <br>
+    <input type="text" name="" id="cid" placeholder="couse id" class="inputField">
+    <br>    
+    Enter Your Questions <br>
+    <br>
+    <input type="text" name="" id="q1" placeholder="question 1" class="inputField">
+    <br>
+    <input type="text" name="" id="q2" placeholder="question 2" class="inputField">
+    <br>
+    <input type="text" name="" id="q3" placeholder="question 3" class="inputField">
+    <br>
+    <input type="text" name="" id="q4" placeholder="question 4" class="inputField">
+    <br>
+    <input type="text" name="" id="q5" placeholder="question 5" class="inputField">
+    <br>
+    <button class="quizinsert" onclick="postData()">Create</button>
+    </div>
+    
+</body>
+</html>

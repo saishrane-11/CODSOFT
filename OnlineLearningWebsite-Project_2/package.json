@@ -1,0 +1,19 @@
+{
+  "name": "onlinelearningplatform",
+  "version": "1.0.0",
+  "description": "This is online learning platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "online",
+    "learning"
+  ],
+  "author": "Saish Rane",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nedb": "^1.8.0"
+  }
+}

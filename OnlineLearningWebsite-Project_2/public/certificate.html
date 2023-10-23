@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #getcert{
+            border: 2px solid gainsboro;
+            border-radius: 10px;
+            background-color: rgb(148, 144, 144);
+            width: 158px;
+            height: 34px;
+        }
+        #getcert:hover{
+            cursor: pointer;
+            background-color: rgb(104, 104, 104);
+        }
+        .inputField{
+            /* background-color: green; */
+            width: 140px;
+            border: none;
+            padding: 4px;
+            border-radius: 8px;
+            border: 2px solid rgb(220, 220, 220);
+        }
+        .inputField:focus{
+            outline: none;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: grey;
+        }
+       .container{
+        width: 60%;
+        margin-top: 10px;
+        border-radius: 10px;
+        /* background-color: green; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px;
+       }
+       
+    </style>
+</head>
+<body>
+    
+   
+    
+    <div class="container">
+        <div class="gycText">
+          <b>GET YOUR CERTIFICATE</b> 
+        </div>
+        <br>
+        <input type="text" name="" id="courseID" class="inputField" placeholder="Enter Course ID">
+        <br>
+        <button id="getcert" onclick="getData()">
+            Get Certificate
+        </button>
+        <br>
+        <!-- <a href="#" id="download-btn">Download</a> -->
+        <canvas id="canvas" height="350px" width="500px"></canvas>
+    </div>
+
+</body>
+<script>
+     var val=localStorage.getItem('inputValue');
+    function downloadCertificate(){
+       
+    var canvas = document.getElementById('canvas')
+var ctx = canvas.getContext('2d')
+
+var downloadBtn = document.getElementById('getcert');
+
+var image = new Image()
+image.crossOrigin="anonymous";
+image.src = 'certificate.jpg'
+image.onload = function () {
+	drawImage()
+}
+
+function drawImage() {
+	// ctx.clearRect(0, 0, canvas.width, canvas.height)
+	ctx.drawImage(image, 0, 0, canvas.width, canvas.height)
+	ctx.font = '40px monotype corsiva'
+	ctx.fillStyle = '#29e'
+	ctx.fillText(val, 40, 180)
+}
+downloadBtn.addEventListener('click', function () {
+	downloadBtn.href = canvas.toDataURL('image/jpg')
+	downloadBtn.download = 'Certificate - ' + val
+})
+
+
+    }
+</script>
+<script>
+   // courseID.addEventListener('input', function () {
+// 	drawImage()
+// })
+</script>
+<script>
+    // getData();
+//     function downloadCertificate() {
+//     console.log("i am in download certificate");
+// 	downloadBtn.href = canvas.toDataURL('image/jpg')
+// 	downloadBtn.download = 'Certificate - ' + val
+// }
+
+    async function getData(){
+        const response=await fetch('/api4');
+        const data=await response.json();
+    console.log(data);
+    console.log("value: "+val);
+    var cid=document.getElementById('courseID').value;
+    console.log("cid : "+cid);
+    var flag=0;
+    for(item of data){
+        console.log(item.username); 
+        if(item.username==val){
+            if(item.courseID==cid){
+                flag=1;
+                downloadCertificate();
+                alert("your certificate has been sent");
+            }
+        }
+    }
+    if(flag==0){
+        alert("you have not done this course");
+    }
+    }
+    
+</script>
+</html>
